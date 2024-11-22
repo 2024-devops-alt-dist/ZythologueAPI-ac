@@ -1,2 +1,6 @@
 # ignorer les modules node_modules
 node_modules/
+
+# fichiers .env
+.env
+

@@ -1,0 +1,33 @@
+# Use postgres/example user/password credentials
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_DB: db2
+      POSTGRES_USER: senga
+      POSTGRES_PASSWORD: megapassword
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data # volume pour la persistance des données
+      - ./src/scripts_sql:/docker-entrypoint-initdb.d/ # volume pour l execution des scripts sql
+
+  # creer une nouvelle image "api"
+  api:
+    build:
+      context: . # build l'image à partir du Dockerfile dans le répertoire courant (repertoire qui est représenté par le point)
+      dockerfile: Dockerfile # (optionnel) Indique le fichier Dockerfile à utiliser
+    container_name: api_container # nom du conteneur
+    restart: always
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    volumes:
+      - .:/app # utilisé pour monter le répertoire de l'app sur le conteneur en tps réel. permet de voir les modifs apportées sans avoir à redémarrer le conteneur.
+    command: npm run dev
+    depends_on:
+      - db # Cela garantit que db sera démarré avant l'API
+
+volumes:
+  postgres_data:

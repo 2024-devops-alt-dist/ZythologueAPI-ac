@@ -1,3 +1,6 @@
+//creation du serveur express :
+// integrer la librairie express dans le fichier app.ts
+
 import express, {Application} from "express";
 const app: Application = express();
 
