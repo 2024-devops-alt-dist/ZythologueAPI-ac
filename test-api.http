@@ -28,3 +28,27 @@ Content-Type: application/json
   "name": "Goudale",
   "country": "France"
 }
+
+# test DELETE /breweries
+DELETE http://localhost:5005/api/v1/breweries/12
+Content-Type: application/json
+
+
+
+
+# Test GET /Users
+GET http://localhost:5005/api/v1/users
+Content-Type: application/json
+
+###
+
+# Test POST /Users
+POST http://localhost:5005/api/v1/users
+Content-Type: application/json
+
+{
+    "first_name": "clint",
+    "last_name": "eastwood",
+    "email": "clint.eastwood@lycos.com",
+    "password": "clinteastwood"
+}
