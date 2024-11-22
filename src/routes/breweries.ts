@@ -1,8 +1,10 @@
-// const express = require("express");
-// const router = express.Router();
 
-// router.get("/", (req, res) => {
-//   res.send("Hello World breweries! voici la liste des brasseries");
-// });
+import { Router } from "express";
+import { breweriesController } from "../controllers/breweries";
 
-// module.exports = router;
+export const router = Router();
+
+router.get("/", breweriesController.get);
+router.post("/", breweriesController.post); 
+
+
