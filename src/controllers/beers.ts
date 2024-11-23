@@ -12,17 +12,52 @@ export const beersController = {
             console.error("Erreur dans le get beers", error);
             res.status(500).json({ message: "Erreur serveur" });
         }
+    },
+    getDetails: async (req: Request, res: Response) => {
+        const id = parseInt(req.params.id)
+        try {
+            const result = await pool.query("SELECT * FROM Beers WHERE beer_id = $1", [id]);
+            res.status(200).json({ beer: result.rows[0] });
+            console.log("id", id);  
+        } catch (error) {
+            console.error("Erreur dans le get beersdetails", error);
+            res.status(500).json({ message: "Erreur serveur" });
+        }
+    },
+    post : async (req: Request, res: Response) => {
+        try {
+            const { name, description, abv, brewery_id, category_id } = req.body;
+            console.log("namm",name, "description", description, "abv", abv);
+            const result = await pool.query("INSERT INTO Beers (name, description, abv, brewery_id, category_id) VALUES ($1, $2, $3, $4, $5) RETURNING *", [name, description, abv, brewery_id, category_id]);
+            res.status(201).json({ beer: result.rows[0] });
+        } catch (error) {
+            console.error("Erreur dans le post beers", error);
+            res.status(500).json({ message: "Erreur serveur coucou" });
+        }
+    },
+    delete: async (req: Request, res: Response) => {
+        const id = parseInt(req.params.id)
+        try {
+            await pool.query("DELETE FROM Beers WHERE beer_id = $1", [id]);
+            console.log("id", id);  
+            res.status(200).json({ message: "bière supprimée avec succès" });
+        } catch (error) {
+            console.error("Erreur dans le delete beers", error);
+            res.status(500).json({ message: "Erreur serveur"});
+        }
+    },
+    put: async (req: Request, res: Response) => {
+        const id = parseInt(req.params.id)
+        const { name, description, abv, brewery_id, category_id} = req.body;
+        try {
+            await pool.query(
+                "UPDATE Beers SET name = $1, description = $2, abv=$3, brewery_id=$4, category_id=$5 WHERE beer_id = $6",
+                [name, description, abv, brewery_id, category_id, id]);
+            res.status(200).json({ message: "bière à jour avec succès" });
+        } catch (error) {
+            console.error("Erreur dans le MAJ bieres", error);
+            res.status(500).json({ message: "Erreur serveur"});
+        }
     }
-    // ,
-    // post: async (req: Request, res: Response) => {
-    //     try {
-    //         const { name, abv, brewery_id } = req.body;
-    //         const result = await pool.query("INSERT INTO Beers (name, price, brewery_id) VALUES ($1, $2, $3) RETURNING *", [name, price, brewery_id]);
-    //         res.status(201).json({ beer: result.rows[0] });
-    //     } catch (error) {
-    //         console.error("Erreur dans le post beers", error);
-    //         res.status(500).json({ message: "Erreur serveur" });
-    //     }
-    // }
 };
 
