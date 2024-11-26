@@ -1,0 +1,266 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Beer API",
+      "version": "1.0.0",
+      "description": "API pour gérer les bières"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:3000/api/v1",
+        "description": "Serveur local"
+      }
+    ],
+    "paths": {
+      "/beers": {
+        "get": {
+          "summary": "Obtenir toutes les bières",
+          "description": "Récupère une liste de toutes les bières disponibles.",
+          "responses": {
+            "200": {
+              "description": "Liste des bières",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "name": {
+                          "type": "string",
+                          "example": "Pilsner"
+                        },
+                        "description": {
+                          "type": "string",
+                          "example": "Une bière légère avec une amertume douce."
+                        },
+                        "abv": {
+                          "type": "number",
+                          "format": "float",
+                          "example": 5.0
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "summary": "Ajouter une bière",
+          "description": "Permet d'ajouter une nouvelle bière à la base de données.",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "example": "IPA"
+                    },
+                    "description": {
+                      "type": "string",
+                      "example": "Une bière forte avec une amertume marquée."
+                    },
+                    "abv": {
+                      "type": "number",
+                      "format": "float",
+                      "example": 6.5
+                    }
+                  },
+                  "required": ["name", "description", "abv"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Bière ajoutée avec succès",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "example": 2
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "IPA"
+                      },
+                      "description": {
+                        "type": "string",
+                        "example": "Une bière forte avec une amertume marquée."
+                      },
+                      "abv": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 6.5
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/beers/{beerId}": {
+        "get": {
+          "summary": "Obtenir une bière spécifique",
+          "description": "Récupère les détails d'une bière à partir de son ID.",
+          "parameters": [
+            {
+              "name": "beerId",
+              "in": "path",
+              "required": true,
+              "description": "ID de la bière",
+              "schema": {
+                "type": "integer",
+                "example": 1
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Détails de la bière",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "Pilsner"
+                      },
+                      "description": {
+                        "type": "string",
+                        "example": "Une bière légère avec une amertume douce."
+                      },
+                      "abv": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 5.0
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Bière non trouvée"
+            }
+          }
+        },
+        "put": {
+          "summary": "Mettre à jour une bière",
+          "description": "Met à jour les détails d'une bière existante.",
+          "parameters": [
+            {
+              "name": "beerId",
+              "in": "path",
+              "required": true,
+              "description": "ID de la bière",
+              "schema": {
+                "type": "integer",
+                "example": 1
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "example": "IPA"
+                    },
+                    "description": {
+                      "type": "string",
+                      "example": "Une bière forte avec une amertume marquée."
+                    },
+                    "abv": {
+                      "type": "number",
+                      "format": "float",
+                      "example": 6.5
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Bière mise à jour avec succès",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "IPA"
+                      },
+                      "description": {
+                        "type": "string",
+                        "example": "Une bière forte avec une amertume marquée."
+                      },
+                      "abv": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 6.5
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "delete": {
+          "summary": "Supprimer une bière",
+          "description": "Supprime une bière de la base de données.",
+          "parameters": [
+            {
+              "name": "beerId",
+              "in": "path",
+              "required": true,
+              "description": "ID de la bière",
+              "schema": {
+                "type": "integer",
+                "example": 1
+              }
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "Bière supprimée avec succès"
+            },
+            "404": {
+              "description": "Bière non trouvée"
+            }
+          }
+        }
+      }
+    }
+  }
+  

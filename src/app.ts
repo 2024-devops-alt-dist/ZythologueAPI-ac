@@ -1,9 +1,15 @@
 //creation du serveur express :
 // integrer la librairie express dans le fichier app.ts
 
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocument from './../swagger.json';
+
 import express, {Application} from "express";
 const app: Application = express();
 app.use(express.json());// accepter le format json sur les requetes
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+
 
 const version = "v1";
 const path = `/api/${version}`;
@@ -14,6 +20,7 @@ import {router as userRouter} from "./routes/users";
 import {router as beer_ingredientsRouter} from "./routes/beer_ingredients";
 import {router as categoriesRouter} from "./routes/categories";
 import {router as reviewsRouter} from "./routes/reviews";
+
 
 
 
