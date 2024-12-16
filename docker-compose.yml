@@ -3,11 +3,11 @@ services:
   db:
     image: postgres
     environment:
-      POSTGRES_DB: db2
-      POSTGRES_USER: senga
-      POSTGRES_PASSWORD: megapassword
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data # volume pour la persistance des données
       - ./src/scripts_sql:/docker-entrypoint-initdb.d/ # volume pour l execution des scripts sql
@@ -20,14 +20,14 @@ services:
     container_name: api_container # nom du conteneur
     restart: always
     ports:
-      - "3000:3000"
+      - "5000:5000"
     env_file:
       - .env
     volumes:
-      - .:/app # utilisé pour monter le répertoire de l'app sur le conteneur en tps réel. permet de voir les modifs apportées sans avoir à redémarrer le conteneur.
-    command: npm run dev
-    depends_on:
-      - db # Cela garantit que db sera démarré avant l'API
+      - .:/usr/src/API_REST # utilisé pour monter le répertoire de l'app sur le conteneur en tps réel. permet de voir les modifs apportées sans avoir à redémarrer le conteneur.
+    # command: npm run dev
+    # depends_on:
+    # - db # Cela garantit que db sera démarré avant l'API
 
 volumes:
   postgres_data:

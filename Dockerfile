@@ -5,19 +5,19 @@ FROM node:18-alpine
 
 
 # définir le répertoire de travail
-WORKDIR /app
-
+# Définit le répertoire de travail
+WORKDIR /usr/src/API_REST
 # copier le fichier package.json dans le répertoire de travail
-COPY package.json /app
+COPY package*.json ./
 
 # installer les dépendances
 RUN npm install
 
 # copier le reste des fichiers dans le répertoire de travail
-COPY . /app
+COPY . .
 
 # lancer l'application
-CMD ["node", "app.js"]
+CMD ["npm", "run", "dev"]
 
 # Exposer le port 3000
-EXPOSE 3000
+EXPOSE 5000
