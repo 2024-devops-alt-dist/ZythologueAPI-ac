@@ -25,6 +25,7 @@ services:
       - .env
     volumes:
       - .:/usr/src/API_REST # utilisé pour monter le répertoire de l'app sur le conteneur en tps réel. permet de voir les modifs apportées sans avoir à redémarrer le conteneur.
+      - /usr/src/API_REST/node_modules # permet de monter le répertoire node_modules du conteneur sur le répertoire node_modules de l'app. Cela permet de ne pas avoir à installer les dépendances à chaque fois que le conteneur est démarré.
     # command: npm run dev
     # depends_on:
     # - db # Cela garantit que db sera démarré avant l'API
