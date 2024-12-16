@@ -70,3 +70,9 @@ CREATE TABLE Pictures (
     CONSTRAINT fk_beer_id FOREIGN KEY (beer_id) REFERENCES Beers(beer_id),
     CONSTRAINT fk_user_id FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
+
+-- CREATE TABLE Ingredients (
+--     ingredient_id SERIAL PRIMARY KEY,
+--     name VARCHAR(50) NOT NULL UNIQUE
+-- );
+

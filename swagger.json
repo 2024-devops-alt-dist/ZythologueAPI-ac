@@ -252,7 +252,7 @@
             }
           ],
           "responses": {
-            "204": {
+            "200": {
               "description": "Bière supprimée avec succès"
             },
             "404": {
@@ -260,7 +260,257 @@
             }
           }
         }
+      }, 
+      "/breweries": {
+        "get": {
+          "summary": "Obtenir toutes les brasseries",
+          "description": "Récupère une liste de toutes les brasseries disponibles.",
+          "responses": {
+            "200": {
+              "description": "Liste des brasseries",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "name": {
+                          "type": "string",
+                          "example": "Chouffe"
+                        },
+                        "country": {
+                          "type": "string",
+                          "example": "Belgium."
+                        },
+                        "created_at": {
+                          "type": "string",
+                          "format": "date-time",
+                          "example": "2021-09-01T00:00:00Z"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "summary": "Ajouter une brasserie",
+          "description": "Permet d'ajouter une nouvelle brasserie à la base de données.",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "example": "Chouffe"
+                    },
+                    "country": {
+                      "type": "string",
+                      "example": "Belgium."
+                    },
+                    "created_at": {
+                      "type":"string",
+                      "format": "date-time",
+                      "example": "2021-09-01T00:00:00Z"
+                    }
+                  },
+                  "required": ["name", "country", "created_at"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "brasserie ajoutée avec succès",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "example": 2
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "IPA"
+                      },
+                      "country": {
+                        "type": "string",
+                        "example": "Belgium."
+                      },
+                      "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2021-09-01T00:00:00Z"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/breweries/{breweryId}": {
+        "get": {
+          "summary": "Obtenir une brasserie spécifique",
+          "description": "Récupère les détails d'une brasserie à partir de son ID.",
+          "parameters": [
+            {
+              "name": "breweryId",
+              "in": "path",
+              "required": true,
+              "description": "ID de la brasserie",
+              "schema": {
+                "type": "integer",
+                "example": 1
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Détails de la brasserie",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "Pilsner"
+                      },
+                      "country": {
+                        "type": "string",
+                        "example": "Belgium."
+                      },
+                      "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2021-09-01T00:00:00Z"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "brasserie non trouvée"
+            }
+          }
+        },
+        "put": {
+          "summary": "Mettre à jour une brasserie",
+          "description": "Met à jour les détails d'une brasserie existante.",
+          "parameters": [
+            {
+              "name": "breweryId",
+              "in": "path",
+              "required": true,
+              "description": "ID de la brasserie",
+              "schema": {
+                "type": "integer",
+                "example": 1
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "example": "IPA"
+                    },
+                    "country": {
+                      "type": "string",
+                      "example": "Belgium."
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "format": "date-time",
+                      "example": "2021-09-01T00:00:00Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "brasserie mise à jour avec succès",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "IPA"
+                      },
+                      "country": {
+                        "type": "string",
+                        "example": "Belgium"
+                      },
+                      "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2021-09-01T00:00:00Z"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "delete": {
+          "summary": "Supprimer une brasserie",
+          "description": "Supprime une brasserie de la base de données.",
+          "parameters": [
+            {
+              "name": "breweryId",
+              "in": "path",
+              "required": true,
+              "description": "ID de la brasserie",
+              "schema": {
+                "type": "integer",
+                "example": 1
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "brasserie supprimée avec succès"
+            },
+            "404": {
+              "description": "brasserie non trouvée"
+            }
+          }
+        }
       }
+
     }
   }
   

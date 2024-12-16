@@ -20,6 +20,7 @@ import {router as userRouter} from "./routes/users";
 import {router as beer_ingredientsRouter} from "./routes/beer_ingredients";
 import {router as categoriesRouter} from "./routes/categories";
 import {router as reviewsRouter} from "./routes/reviews";
+import {router as ingredientsRouter} from "./routes/ingredients";
 
 
 
@@ -30,6 +31,8 @@ app.use(`${path}/users`, userRouter);
 app.use(`${path}/beer_ingredients`, beer_ingredientsRouter);
 app.use(`${path}/categories`, categoriesRouter);
 app.use(`${path}/reviews`, reviewsRouter);
+app.use(`${path}/ingredients`, ingredientsRouter);
+
 
 
 export default app;
