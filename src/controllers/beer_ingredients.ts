@@ -15,10 +15,9 @@ export const beer_ingredientsController = {
     },
     getDetails: async (req: Request, res: Response) => {
         const id = parseInt(req.params.id);
-        console.log("leeee id", id);
         try {
-            const result = await pool.query("SELECT * FROM Beer_Ingredients WHERE beer_ingredient_id = $1", [id]);
-            res.status(200).json({ beer_ingredient: result.rows[0] });
+            const result = await pool.query("SELECT * FROM Beer_Ingredients WHERE beer_id = $1", [id]);
+            res.status(200).json({ beer_ingredient: result.rows });
         } catch (error:any) {
             console.error("Erreur dans le get Beer_Ingredients", error);
             res.status(500).json({ error: error.message });
@@ -34,8 +33,28 @@ export const beer_ingredientsController = {
             res.status(500).json({ error: error.message });
         }
     },
-    
-
-
+    put: async (req: Request, res: Response) => {
+        const id = parseInt(req.params.id);
+        const { beer_id, ingredient_id, percentage } = req.body;
+        console.log('hello laaaa');
+        try {
+            await pool.query("UPDATE Beer_Ingredients SET beer_id = $1, ingredient_id = $2, percentage = $3 WHERE beer_id = $4", [beer_id, ingredient_id, percentage, id]);
+            res.status(200).json({ message: "Beer_Ingredients modifié avec succès" });
+        } catch (error: any) {
+            console.error("Erreur dans le put Beer_Ingredients", error);
+            res.status(500).json({ error: error.message });
+        }
+    },
+    delete: async (req: Request, res: Response) => {
+        const id = parseInt(req.params.id);
+        try {
+            await pool.query("DELETE FROM Beer_Ingredients WHERE beer_id = $1", [id]);
+            console.log("id: " + id);
+            res.status(200).json({ message: "Beer_Ingredients supprimé avec succès" });
+        } catch (error: any) {
+            console.error("Erreur dans le delete Beer_Ingredients", error);
+            res.status(500).json({ error: error.message });
+        }
+    }
 };
 
