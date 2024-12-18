@@ -45,16 +45,16 @@ export const beer_ingredientsController = {
             res.status(500).json({ error: error.message });
         }
     },
-    delete: async (req: Request, res: Response) => {
-        const id = parseInt(req.params.id);
-        try {
-            await pool.query("DELETE FROM Beer_Ingredients WHERE beer_id = $1", [id]);
-            console.log("id: " + id);
-            res.status(200).json({ message: "Beer_Ingredients supprimé avec succès" });
-        } catch (error: any) {
-            console.error("Erreur dans le delete Beer_Ingredients", error);
-            res.status(500).json({ error: error.message });
-        }
-    }
+    // delete: async (req: Request, res: Response) => {
+    //     const id = parseInt(req.params.id);
+    //     try {
+    //         await pool.query("DELETE FROM Beer_Ingredients WHERE beer_id = $1", [id]);
+    //         console.log("id: " + id);
+    //         res.status(200).json({ message: "Beer_Ingredients supprimé avec succès" });
+    //     } catch (error: any) {
+    //         console.error("Erreur dans le delete Beer_Ingredients", error);
+    //         res.status(500).json({ error: error.message });
+    //     }
+    // }
 };
 
