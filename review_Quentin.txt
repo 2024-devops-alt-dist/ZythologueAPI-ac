@@ -1,6 +1,0 @@
-Review de Quentin sur le projet Zithologue :
-J'ai suivi le readme, et tout s'est bien passé.
-Je n'avais qu'à cloner et lancer docker.
-Le projet est bien structuré, Quentin a également fait les models et même un middleware pour les ids.
-la base de données était fournie et j'ai testé la methode post sur "Beers".
-La bière s'est ajoutée à la base de données

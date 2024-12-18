@@ -1,0 +1,9 @@
+# Passage en revue du projet par Adrien Leyval
+
+Le README permettant la mise en place du projet est très complet, les étapes sont bien décrites, et permettent bien de lancer correctement la base de données et l'application node.
+
+Les routes de CRUD pour les bières et brasseries sont présentes, documentées grâce au swagger sur la route /api-docs.
+
+Les routes pour les méthode GET, POST, PUT et DELETE des bières et brasseries fonctionnent parfaitement, attention dans le swagger pour les méthodes POST et PUT des bières à bien ajouter le brewery_id dans le body.
+
+Le projet est très complet et fonctionnel, plusieurs autres routes sont également disponibles dans l'api.
