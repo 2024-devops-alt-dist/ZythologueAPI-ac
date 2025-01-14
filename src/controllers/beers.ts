@@ -5,7 +5,13 @@ export const beersController = {
     get: async (req: Request, res: Response) => {
         try {
             // res.status(200).json({ message: "Hello World" });
-            const result = await pool.query("SELECT * FROM Beers");
+            const result = await pool.query(`
+                SELECT b.beer_id, b.name AS beer_name, b.description, b.abv, 
+                    br.name AS brewery_name, c.name AS category_name
+                FROM Beers b
+                JOIN Breweries br ON b.brewery_id = br.brewery_id
+                JOIN Categories c ON b.category_id = c.category_id
+            `);
             res.status(200).json({ beers: result.rows });
         } catch (error) {
             console.error("Erreur dans le get beers", error);

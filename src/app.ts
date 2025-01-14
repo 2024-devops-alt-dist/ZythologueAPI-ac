@@ -1,5 +1,4 @@
 //creation du serveur express :
-// integrer la librairie express dans le fichier app.ts
 
 import swaggerUi from 'swagger-ui-express';
 import swaggerDocument from './../swagger.json';
@@ -7,7 +6,7 @@ import swaggerDocument from './../swagger.json';
 import express, {Application} from "express";
 import cors from "cors";
 
-
+// detailler ce que cors peut accepter 
 const corsOptions = {
     origin: ['http://localhost:5000', 'http://localhost:5173'], 
     methods: ['GET', 'POST', 'PUT', 'DELETE'], 
@@ -16,7 +15,7 @@ const corsOptions = {
 
 const app: Application = express();
 app.use(express.json());// accepter le format json sur les requetes
-app.use(cors(corsOptions));
+app.use(cors(corsOptions)); // accepter les requetes de l'origine http://localhost:5000
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 
