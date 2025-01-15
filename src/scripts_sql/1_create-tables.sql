@@ -30,6 +30,7 @@ CREATE TABLE Beers (
     name VARCHAR(50) NOT NULL,
     description TEXT,
     abv FLOAT(2) NOT NULL,
+    logo_url TEXT DEFAULT NULL,
     brewery_id INT NOT NULL,
     category_id INT NOT NULL,
     CONSTRAINT fk_brewery_id FOREIGN KEY (brewery_id) REFERENCES Breweries(brewery_id),

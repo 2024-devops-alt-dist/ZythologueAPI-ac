@@ -7,10 +7,11 @@ export const beersController = {
             // res.status(200).json({ message: "Hello World" });
             const result = await pool.query(`
                 SELECT b.beer_id, b.name AS beer_name, b.description, b.abv, 
-                    br.name AS brewery_name, c.name AS category_name
-                FROM Beers b
-                JOIN Breweries br ON b.brewery_id = br.brewery_id
-                JOIN Categories c ON b.category_id = c.category_id
+ br.name AS brewery_name, c.name AS category_name, b.logo_url AS logo_url
+FROM Beers b
+JOIN Breweries br ON b.brewery_id = br.brewery_id
+JOIN Categories c ON b.category_id = c.category_id
+
             `);
             res.status(200).json({ beers: result.rows });
         } catch (error) {
