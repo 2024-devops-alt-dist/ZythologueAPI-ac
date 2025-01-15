@@ -3,6 +3,7 @@ CREATE TABLE Breweries (
     name VARCHAR(50) NOT NULL UNIQUE,
     country VARCHAR(50) NOT NULL,
     created_at DATE DEFAULT CURRENT_DATE
+    logo TEXT DEFAULT NULL
 );
 
 CREATE TABLE Users (
