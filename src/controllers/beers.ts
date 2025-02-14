@@ -38,7 +38,7 @@ JOIN Categories c ON b.category_id = c.category_id
             res.status(201).json({ beer: result.rows[0] });
         } catch (error) {
             console.error("Erreur dans le post beers", error);
-            res.status(500).json({ message: "Erreur serveur coucou" });
+            res.status(500).json({ message: "Erreur serveur coucou le post" });
         }
     },
     delete: async (req: Request, res: Response) => {
